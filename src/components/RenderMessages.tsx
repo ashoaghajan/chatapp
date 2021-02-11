@@ -1,13 +1,15 @@
 import React from 'react';
-import MyMessage from './MyMessage';
-import TheirMessage from './TheirMessage';
+import MyMessage from './messages/MyMessage';
+import TheirMessage from './messages/TheirMessage';
+import ReadReceipes from './messages/ReadReceipes';
 
 export interface RenderMessagesProps {
     userName: string,
-    messages: any
+    messages: any,
+    chat: Chat
 }
  
-const RenderMessages: React.SFC<RenderMessagesProps> = ({ userName, messages }) => {
+const RenderMessages: React.SFC<RenderMessagesProps> = ({ userName, messages, chat }) => {
 
     const keys = Object.keys(messages);
 
@@ -26,13 +28,13 @@ const RenderMessages: React.SFC<RenderMessagesProps> = ({ userName, messages }) 
                     <div key={`msg_${index}`} style={{ width: '100%'}}>
                         <div className="message-block">
                             {isMyMessage ? (
-                               <MyMessage /> 
+                               <MyMessage message={message}/> 
                             ): (
-                                <TheirMessage />
+                                <TheirMessage message={message} lastMessage={messages[lastMessageKey!]}/>
                             )}
                         </div>
                         <div className="read-receipes" style={receipesStyle}>
-                            read-receipes
+                            <ReadReceipes message={message} isMyMessage={isMyMessage} chat={chat}/>
                         </div>
                     </div>
                 )
