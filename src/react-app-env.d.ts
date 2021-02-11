@@ -29,3 +29,8 @@ interface Chat {
     people: PersonInfo[]
     title: string
 }
+
+type UserLogin = { 
+    username: string, 
+    password: string 
+}
